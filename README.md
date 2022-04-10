@@ -73,8 +73,8 @@ The script can take advantage of the module [zxcvbn-python](https://github.com/d
 
 ### About
 
-![](/Users/mcdan/Documents/GitHub/reindeer-flotilla/images/title_small.png)
+![](../images/title_small.png)
 
-![](/Users/mcdan/Documents/GitHub/reindeer-flotilla/images/paperback.png)
+![](../images/paperback.png)
 
 The title is, of course, from [Tron](https://en.wikipedia.org/wiki/Tron). I've always remembered seeing those words flash onto the screen when I saw it in the theater. In fact, that was the summer I learned [BASIC](https://en.wikipedia.org/wiki/BASIC) at computer camp at [Cranbrook](https://en.wikipedia.org/wiki/Cranbrook_Educational_Community#Cranbrook_Institute_of_Science) with my buddy, Mike.
