@@ -62,11 +62,11 @@ def decipher_pattern(args):
             processed_string += getword()
         elif item == "R":
             ran_cap_raw = list(getword())
-            cap_pos = secrets.randbelow(len(ran_cap_raw) - 1)
+            cap_pos = secrets.randbelow(len(ran_cap_raw))
             ran_cap_raw[cap_pos] = ran_cap_raw[cap_pos].upper()
             processed_string += ''.join(ran_cap_raw)
         elif item == "#":
-            processed_string += str(secrets.randbelow(9))
+            processed_string += str(secrets.randbelow(10))
         elif item == "E":
             processed_string += str.capitalize(getspanishword())
         elif item == "e":
@@ -76,7 +76,7 @@ def decipher_pattern(args):
         elif item == "f":
             processed_string += getfrenchword()
         elif item == "^":
-            processed_string += symbol_list[secrets.randbelow(len(symbol_list) - 1)]
+            processed_string += symbol_list[secrets.randbelow(len(symbol_list))]
         else:
             print(f"{item} is an invalid pattern character")
             sys.exit()
