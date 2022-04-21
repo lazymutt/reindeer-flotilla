@@ -3,7 +3,7 @@
 
 import argparse
 import pathlib
-import random
+import secrets
 import sys
 try:
     from zxcvbn import zxcvbn
@@ -19,7 +19,7 @@ def getword():
 
     words_path = '/usr/share/dict/words'
 
-    random_word = random.choice(open(words_path, encoding='utf-8').readlines())
+    random_word = secrets.choice(open(words_path, encoding='utf-8').readlines())
     random_word = random_word.rstrip('\r\n')
     return random_word.lower()
 
@@ -30,7 +30,7 @@ def getfrenchword():
     """
     words_path = 'francais.txt'
 
-    random_word = random.choice(open(words_path, encoding='utf-8').readlines())
+    random_word = secrets.choice(open(words_path, encoding='utf-8').readlines())
     random_word = random_word.rstrip('\r\n')
     return random_word.lower()
 
@@ -41,7 +41,7 @@ def getspanishword():
     """
     words_path = 'espanol.txt'
 
-    random_word = random.choice(open(words_path, encoding='utf-8').readlines())
+    random_word = secrets.choice(open(words_path, encoding='utf-8').readlines())
     random_word = random_word.rstrip('\r\n')
     return random_word.lower()
 
@@ -62,11 +62,11 @@ def decipher_pattern(args):
             processed_string += getword()
         elif item == "R":
             ran_cap_raw = list(getword())
-            cap_pos = random.randint(0, len(ran_cap_raw) - 1)
+            cap_pos = secrets.randbelow(len(ran_cap_raw) - 1)
             ran_cap_raw[cap_pos] = ran_cap_raw[cap_pos].upper()
             processed_string += ''.join(ran_cap_raw)
         elif item == "#":
-            processed_string += str(random.randint(0, 9))
+            processed_string += str(secrets.randbelow(9))
         elif item == "E":
             processed_string += str.capitalize(getspanishword())
         elif item == "e":
@@ -76,7 +76,7 @@ def decipher_pattern(args):
         elif item == "f":
             processed_string += getfrenchword()
         elif item == "^":
-            processed_string += symbol_list[random.randint(0, len(symbol_list) - 1)]
+            processed_string += symbol_list[secrets.randbelow(len(symbol_list) - 1)]
         else:
             print(f"{item} is an invalid pattern character")
             sys.exit()
@@ -88,9 +88,24 @@ def decipher_pattern(args):
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Generate a new code name/password.')
-    parser.add_argument('-p', '--pattern', type=str, default='wWw', help='Output pattern')
-    parser.add_argument('-s', '--separator', type=str, default='', help='Pattern separator character')
+    pattern_description = '''\
+        Generates passwords.
+    
+        Output pattern flags:
+        Letter\tMeaning
+        W\tCapitalized English word
+        w\tLowercase English word
+        R\tEnglish word, with random letter capitalized
+        #\tSingle digit, multiple instances for more digits
+        ^\tSingle symbol, multiple instances for more symbols
+        E\tCapitalized Spanish word
+        s\tLowercase Spanish word
+        F\tCapitalized French word
+        f\tLowercase French word
+    '''
+    parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter, description=pattern_description)
+    parser.add_argument('-p', '--pattern', type=str, default='wWw', help='Provide pattern selectors, see description above')
+    parser.add_argument('-s', '--separator', type=str, default='', help='Pattern selector separator character')
 
     args = parser.parse_args()
 
