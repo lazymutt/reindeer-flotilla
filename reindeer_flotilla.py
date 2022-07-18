@@ -90,7 +90,7 @@ def decipher_pattern(args):
 def main():
     pattern_description = '''\
         Generates passwords.
-    
+
         Output pattern flags:
         Letter\tMeaning
         W\tCapitalized English word
